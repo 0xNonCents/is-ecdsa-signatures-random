@@ -12,6 +12,7 @@ message = "My test message"
 
 # Our desired output
 desired_output = 64
+available_options = 10064
 tries = 0
 
 # Generate Signature
@@ -19,7 +20,7 @@ randNum = RandomInteger.between(1, privateKey.curve.N - 1)
 signature = modified_sign.sign(message, privateKey, randNum=randNum)
 byte_slice = int.from_bytes(b64decode(signature.toBase64()), 'big')
 tries = tries + 1
-while desired_output != byte_slice % 128:
+while desired_output != byte_slice % available_options:
     randNum = RandomInteger.between(1, privateKey.curve.N - 1)
     signature = modified_sign.sign(message, privateKey, randNum=randNum)
     byte_slice = int.from_bytes(b64decode(signature.toBase64()), 'big')
