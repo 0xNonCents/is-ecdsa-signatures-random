@@ -295,4 +295,14 @@ contract ECDSA_Test {
 
     }
 
+    function _tryRecoverTwo(bytes32 hash, bytes memory signature_one, bytes memory signature_two) public pure returns (address) {
+        
+        address recovered_one = ECDSA.recover(hash, signature_one);
+        address recovered_two = ECDSA.recover(hash, signature_two);
+
+
+        assert(recovered_one == recovered_two);
+        return recovered_one;
+
+    }
 }
